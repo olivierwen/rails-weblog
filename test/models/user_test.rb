@@ -12,4 +12,11 @@ class UserTest < ActiveSupport::TestCase
 
     assert_equal 'Bob', user.display_name
   end
+
+  test 'ensures that password length is min 8' do
+    user = User.new(password: '1234567')
+
+    assert_not user.valid?
+    assert_equal [:password], user.errors.keys
+  end
 end
